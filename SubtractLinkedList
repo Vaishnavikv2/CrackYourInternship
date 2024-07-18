@@ -1,0 +1,42 @@
+class Solution {
+    public Node Reverse(Node head){
+        Node curr=head;
+        Node prev=null;
+        while(curr!=null){
+            Node nextNode=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=nextNode;
+        }
+        return prev;
+    }
+    public Node subLinkedList(Node head1, Node head2) {
+       StringBuilder str1=new StringBuilder();
+       while(head1!=null){
+           str1.append(head1.data);
+           head1=head1.next;
+       }
+       StringBuilder str2=new StringBuilder();
+       while(head2!=null){
+           str2.append(head2.data);
+           head2=head2.next;
+       }
+       Node dummy =new Node(-1);
+       Node temp=dummy;
+        BigInteger num1 = new BigInteger(str1.toString());
+        BigInteger num2 = new BigInteger(str2.toString());
+        BigInteger result = num1.subtract(num2).abs();
+        
+        if (result.equals(BigInteger.ZERO)) {
+            return new Node(0);
+        }
+        String resultStr = result.toString();
+        for (char ch : resultStr.toCharArray()) {
+            temp.next = new Node(Character.getNumericValue(ch));
+            temp = temp.next;
+        }
+
+        return (dummy.next);
+    }
+}
+      
