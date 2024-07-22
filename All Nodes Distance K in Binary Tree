@@ -1,0 +1,55 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public void Parent(TreeNode root,HashMap<TreeNode,TreeNode>mpp){
+        if(root==null) return;
+        if(root.left!=null){
+            mpp.put(root.left,root);
+            Parent(root.left,mpp);
+        }
+        if(root.right!=null){
+            mpp.put(root.right,root);
+            Parent(root.right,mpp);
+        }
+    }
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+        List<Integer>res=new ArrayList<>();
+        if(root==null) return res;
+        HashMap<TreeNode,TreeNode>mpp=new HashMap<>();
+        Parent(root,mpp);
+        Queue<TreeNode>q=new LinkedList<>();
+        HashMap<TreeNode,Boolean>visited=new HashMap<>();
+        q.offer(target);
+        visited.put(target,true);
+        while(!q.isEmpty() && k>0){
+            int size=q.size();
+            for(int i=0;i<size;i++){
+              TreeNode curr=q.poll();
+              if(curr.left!=null && !visited.containsKey(curr.left)){
+                q.offer(curr.left);
+                visited.put(curr.left,true);
+              }
+               if(curr.right!=null && !visited.containsKey(curr.right)){
+                q.offer(curr.right);
+                visited.put(curr.right,true);
+              }
+              if(mpp.containsKey(curr) && !visited.containsKey(mpp.get(curr))){
+                q.offer(mpp.get(curr));
+                visited.put(mpp.get(curr),true);
+              }
+            }
+            k--;
+        }
+        while(!q.isEmpty()){
+            res.add(q.poll().val);
+        }
+      return res;
+    }
+}
