@@ -1,0 +1,21 @@
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int n=needle.length();
+        if(haystack.equals(needle)){
+            return 0;
+        }
+        if(haystack.length()<n){
+            return -1;
+        }
+        int low=0;
+        int high=n;
+        while(high<haystack.length()+1){
+            if(haystack.substring(low,high).equals(needle)){
+                return low;
+            }
+            low++;
+            high++;
+        }
+       return -1;
+    }
+}
