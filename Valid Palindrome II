@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isPalindrome(char[] ch,int low,int right){
+        while(low<right){
+            if(ch[low]==ch[right]){
+                low++;
+                right--;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean validPalindrome(String s) {
+        char[] ch=s.toCharArray();
+        int low=0;
+        int right=ch.length-1;
+        while(low<=right){
+            if(ch[low]==ch[right]){
+                low++;
+                right--;
+            }
+            else{
+                return isPalindrome(ch,low+1,right) || isPalindrome(ch,low,right-1);
+            }
+        }
+        return true;
+    }
+}
