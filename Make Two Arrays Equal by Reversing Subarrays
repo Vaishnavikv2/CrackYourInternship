@@ -1,0 +1,21 @@
+class Solution {
+    public boolean canBeEqual(int[] target, int[] arr) {
+       HashMap<Integer,Integer>mpp=new HashMap<>();
+       for(int num:target){
+        mpp.put(num,mpp.getOrDefault(num,0)+1);
+       }
+       for(int num:arr){
+        if(!mpp.containsKey(num)){
+            return false;
+        }
+        if(mpp.containsKey(num) && mpp.get(num)>0){
+           int value=mpp.get(num);
+           mpp.put(num,value-1);
+        }
+        if(mpp.containsKey(num) && mpp.get(num)==0){
+            mpp.remove(num);
+        }
+       }
+       return mpp.size()==0;
+    }
+}
