@@ -1,0 +1,23 @@
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        if(k==0) return 0;
+       int preSum=0;
+       HashMap<Integer,Integer>mpp=new HashMap<>();
+       mpp.put(-1,0);
+       for(int i=0;i<cardPoints.length;i++){
+         preSum=preSum+cardPoints[i];
+         mpp.put(i,preSum);
+       }
+       int score=Integer.MIN_VALUE;
+       int left=0;
+       int right=cardPoints.length-k-1;
+       int maxi=mpp.get(cardPoints.length-1);
+       while(right<cardPoints.length){
+          int sum=mpp.get(right)-mpp.get(left-1);
+          score=Math.max(score,maxi-sum);
+          right++;
+          left++;
+       }
+       return score;
+    }
+}
