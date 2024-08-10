@@ -1,0 +1,45 @@
+class Solution {
+    public ListNode Reverse(ListNode head){
+        ListNode curr = head;
+        ListNode prev = null;
+        while (curr != null) {
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
+
+    public void reorderList(ListNode root) {
+        if (root == null || root.next == null) return;
+
+        // Find the middle of the list
+        ListNode slow = root;
+        ListNode fast = root;
+        ListNode prev = null;
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        prev.next = null;  // Split the list into two halves
+
+        // Reverse the second half
+        ListNode secondHalf = Reverse(slow);
+
+        // Merge the two halves
+        ListNode firstHalf = root;
+        while (firstHalf != null && secondHalf != null) {
+            ListNode temp1 = firstHalf.next;
+            ListNode temp2 = secondHalf.next;
+
+            firstHalf.next = secondHalf;
+            if (temp1 == null) break;
+            secondHalf.next = temp1;
+
+            firstHalf = temp1;
+            secondHalf = temp2;
+        }
+    }
+}
