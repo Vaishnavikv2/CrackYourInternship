@@ -1,0 +1,31 @@
+class MyQueue {
+    Queue<Integer>pq=new LinkedList<>();
+    public MyQueue() {
+        
+    }
+    
+    public void push(int x) {
+        pq.offer(x);
+    }
+    
+    public int pop() {
+        return pq.poll();
+    }
+    
+    public int peek() {
+        return pq.peek();
+    }
+    
+    public boolean empty() {
+        return pq.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
