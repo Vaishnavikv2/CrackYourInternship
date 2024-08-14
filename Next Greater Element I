@@ -1,0 +1,24 @@
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] res=new int[nums1.length];
+        for(int j=0;j<nums1.length;j++){
+            boolean found=false;
+            boolean greater=false;
+            for(int i=0;i<nums2.length;i++){
+                if(nums1[j]==nums2[i]){
+                    found=true;
+                }
+                if(found && i<nums2.length && nums2[i]>nums1[j]){
+                    greater=true;
+                    res[j]=nums2[i];
+                    break;
+                }
+            }
+            if(!found || !greater){
+                res[j]=-1;
+            }
+        }
+
+        return res;
+    }
+}
