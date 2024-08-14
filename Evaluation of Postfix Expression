@@ -1,0 +1,50 @@
+//{ Driver Code Starts
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    
+	public static void main (String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int t = Integer.parseInt(br.readLine().trim());
+		while(t-->0){
+		    System.out.println(new Solution().evaluatePostFix(br.readLine().trim()));
+		}
+	}
+}
+// } Driver Code Ends
+
+
+class Solution
+{
+    //Function to evaluate a postfix expression.
+    public static int evaluatePostFix(String S)
+    {
+        Stack<Integer>stk=new Stack<Integer>();
+        for(char ch:S.toCharArray()){
+            if(Character.isDigit(ch)){
+                stk.push(ch-'0');
+            }
+            else{
+                int num1=stk.pop();
+                int num2=stk.pop();
+                int num=0;
+                if(ch=='+'){
+                   num=num1+num2;
+                }
+                else if( ch=='-'){
+                num=num2-num1;
+                }
+                else if(ch=='/'){
+                   num=num2/num1;
+                }
+                else{
+                     num=num1*num2;
+                }
+                stk.push(num);
+            }
+        }
+        return stk.peek();
+    }
+}
